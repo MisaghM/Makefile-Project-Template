@@ -42,7 +42,7 @@ The build task is simply running the `make` command, and the launch (F5) does th
 
 ## For Windows (MinGW)
 
-For the Makefile to work on Windows, some minor changes need to be made:
+For the **Makefile** to work on Windows, some minor changes need to be made:
 
 - If using CMD, these unix slashes (`/`) have to be changed to backslashes (`\`):
 
@@ -57,6 +57,13 @@ For the Makefile to work on Windows, some minor changes need to be made:
     [Remove lines 32 and 37, and change `.dTMP` at the end of line 31 to `.d`]  
     *Or* get a `touch` command [equivalent](https://stackoverflow.com/a/30019017). (make file if it doesn't exist, and set the last modified date to now if it does)  
     *Alternatively*, since only the last modified date change is used for the postcompile step, you can just change `touch $@` (line 32) to `copy /b $@ +,,`
+
+And for **vscode**, since the `make` executable is named `mingw32-make` in MinGW, you should make the change in `tasks.json`.  
+*Or* you can create a `make.bat` file with the following content:  
+
+```bat
+mingw32-make %*
+```
 
 ## License
 
