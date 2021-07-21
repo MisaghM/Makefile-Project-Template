@@ -18,7 +18,7 @@ A GNU Makefile template with [auto dependencies](https://make.mad-scientist.net/
 
 Put all source files in `PATH_SRC` (the `src` folder by default)  
 Write source file names in `FILES` (set more `VPATH` if you want)  
-You can alse put libraries in `PATH_LIB` and set the `LDLIBS`.  
+You can also put libraries in `PATH_LIB` and set the `LDLIBS`.  
 That's it.
 
 ## Folder Hierarchy
