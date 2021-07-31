@@ -5,7 +5,7 @@ PATH_BIN   := $(PATH_BUILD)/bin
 PATH_OBJ   := $(PATH_BUILD)/obj
 PATH_DEP   := $(PATH_OBJ)/dep
 
-include vars.mk
+include common_vars.mk
 
 LDFLAGS += -L "$(PATH_LIB)"
 LDLIBS  += #-l
