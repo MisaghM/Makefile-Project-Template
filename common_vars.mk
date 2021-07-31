@@ -1,5 +1,5 @@
 CXX      = g++
-CXXFLAGS += -Wall -Wextra -pedantic
+CXXFLAGS += -Wall -pedantic
 CC       = $(CXX) $(CXXFLAGS)
 CPPFLAGS += -std=c++11
 

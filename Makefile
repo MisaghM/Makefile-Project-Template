@@ -7,8 +7,9 @@ PATH_DEP   := $(PATH_OBJ)/dep
 
 include common_vars.mk
 
-LDFLAGS += -L "$(PATH_LIB)"
-LDLIBS  += #-l
+LDFLAGS  += -L "$(PATH_LIB)"
+LDLIBS   += #-l
+CPPFLAGS += #-I
 
 OUT_EXE := program.exe
 
