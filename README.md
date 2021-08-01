@@ -47,9 +47,9 @@ For the **Makefile** to work on Windows, some minor changes need to be made:
 - If using CMD, these unix slashes (`/`) have to be changed to backslashes (`\`):
 
   - Line 4, 5, 6.
-  - Line 31, 32.
-  - Line 53, 54, 55.
-  - Line 59.
+  - Line 33.
+  - Line 54, 55.
+  - Line 60.
   
 - The [postcompile](http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/#unusual) step requires the `touch` command which is not available on Windows.
 
