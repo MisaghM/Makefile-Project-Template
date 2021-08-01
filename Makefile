@@ -53,7 +53,7 @@ $(PATH_DEP): ; $(MKDIR) $@
 clean: clean-obj clean-dep clean-exe
 clean-obj: ; $(RM) $(PATH_OBJ)/*.o
 clean-dep: ; $(RM) $(PATH_DEP)/*.d
-clean-exe: ; $(RM) $(PATH_BIN)/*.exe
+clean-exe: ; $(RM) $(PATH_BIN)/$(OUT_EXE)
 delete-build: ; $(RMDIR) $(PATH_BUILD)
 
 ARGS ?= 
