@@ -56,7 +56,7 @@ clean-dep: ; $(RM) $(PATH_DEP)/*.d
 clean-exe: ; $(RM) $(PATH_BIN)/$(OUT_EXE)
 delete-build: ; $(RMDIR) $(PATH_BUILD)
 
-ARGS ?= 
+ARGS ?=
 run: ; cd $(PATH_BIN) && ./$(OUT_EXE) $(ARGS)
 
 help:
