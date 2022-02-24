@@ -6,7 +6,7 @@
   - [How-To](#how-to)
   - [Folder Hierarchy](#folder-hierarchy)
   - [.vscode](#vscode)
-  - [For Windows (MinGW)](#for-windows-mingw)
+  - [Windows](#windows)
   - [License](#license)
 
 ## About
@@ -19,7 +19,11 @@ A GNU Makefile template with [auto dependencies](https://make.mad-scientist.net/
 Put all source files in `PATH_SRC` (the `src` folder by default)  
 Write source file names in `FILES` (set more `VPATH` if you want)  
 You can also put libraries in `PATH_LIB` and set the `LDLIBS`.  
-That's it.
+That's it.  
+  
+Use `make help` to see all the available targets.  
+There are some targets for cleanup (`clean` `clean-obj` `clean-dep` `clean-exe` `delete-build`)  
+And a target to run the program (`make run ARGS="arg1 arg2..."`)
 
 ## Folder Hierarchy
 
@@ -38,13 +42,42 @@ By default:
 
 Optional for VSCode.  
 This folder contains a sample `launch.json` and `tasks.json` required for building in VSCode.  
-The build task is simply running the `make` command, and the launch (F5) does this as the `preBuildTask` and runs the program in gdb (and skips the `std::` namespace for easier debugging).
+The build task is simply running the `make` command. Launching (F5) does this as the `preBuildTask` and runs the program in gdb (and skips the `std::` namespace for easier debugging).
 
-## For Windows (MinGW)
+## Windows
 
-For the **Makefile** to work on Windows, some minor changes need to be made:
+It is recommended to use a Bash-like environment to make the best of Makefiles on Windows.  
+Trying to only use MinGW with CMD may lead to many problems.
 
-- If using CMD, these unix slashes (`/`) have to be changed to backslashes (`\`):
+<details><summary>No Bash: (click to expand)</summary>
+
+For the **Makefile** to work without Bash, some changes need to be made:
+  
+- The Unix commands need to be replaced with DOS ones.
+
+  In common_vars.mk:
+
+  ```makefile
+  ifeq ($(OS),Windows_NT)
+    MKDIR  = mkdir
+    RM     = del
+    RMDIR  = rmdir /S /Q
+    COPY   = copy
+    MOVE   = move
+    RENAME = ren
+    NULL_DEVICE = nul
+  else
+    MKDIR  = mkdir -p
+    RM     = rm -f
+    RMDIR  = rm -rf
+    COPY   = cp
+    MOVE   = mv -f
+    RENAME = mv -f
+    NULL_DEVICE = /dev/null
+  endif
+  ```
+
+- In the Makefile, these unix slashes (`/`) have to be changed to backslashes (`\`):
 
   - Line 4, 5, 6.
   - Line 33.
@@ -53,10 +86,10 @@ For the **Makefile** to work on Windows, some minor changes need to be made:
   
 - The [postcompile](http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/#unusual) step requires the `touch` command which is not available on Windows.
 
-    You can either remove the postcompile step:  
-    [Remove lines 32 and 37, and change `.dTMP` at the end of line 31 to `.d`]  
-    *Or* get a `touch` command [equivalent](https://stackoverflow.com/a/30019017). (make file if it doesn't exist, and set the last modified date to now if it does)  
-    *Alternatively*, since only the last modified date change is used for the postcompile step, you can just change `touch $@` (line 32) to `copy /b $@ +,,`
+  You can either remove the postcompile step:  
+  [Remove lines 32 and 37, and change `.dTMP` at the end of line 31 to `.d`]  
+  *Or* get a `touch` command [equivalent](https://stackoverflow.com/a/30019017). (make file if it doesn't exist, and set the last modified date to now if it does)  
+  *Alternatively*, since only the last modified date change is used for the postcompile step, you can just change `touch $@` (line 32) to `copy /b $@ +,,`
 
 And for **vscode**, since the `make` executable is named `mingw32-make` in MinGW, you should make the change in `tasks.json`.  
 *Or* you can create a `make.bat` file with the following content:  
@@ -64,6 +97,8 @@ And for **vscode**, since the `make` executable is named `mingw32-make` in MinGW
 ```bat
 mingw32-make %*
 ```
+
+</details>
 
 ## License
 
