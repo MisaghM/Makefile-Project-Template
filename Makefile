@@ -7,9 +7,9 @@ PATH_DEP   := $(PATH_OBJ)/dep
 
 include common_vars.mk
 
-LDFLAGS  += -L "$(PATH_LIB)"
-LDLIBS   += #-l
-CPPFLAGS += #-I
+LDFLAGS  += # -L $(PATH_LIB)
+LDLIBS   += # -l
+CPPFLAGS += # -I
 
 OUT_EXE := program.exe
 
@@ -27,15 +27,15 @@ FILES_OBJ = $(patsubst %, $(PATH_OBJ)/%.o, $(basename $(FILES)))
 all: $(PATH_BIN)/$(OUT_EXE)
 
 $(PATH_BIN)/$(OUT_EXE): $(FILES_OBJ)
-	 $(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 DEPFLAGS    = -MT $@ -MMD -MP -MF $(PATH_DEP)/$*.dTMP
 POSTCOMPILE = @$(MOVE) "$(PATH_DEP)/$*.dTMP" "$(PATH_DEP)/$*.d" > $(NULL_DEVICE) && touch $@
 
 $(PATH_OBJ)/%.o: %.cpp
 $(PATH_OBJ)/%.o: %.cpp $(PATH_DEP)/%.d | $(PATH_BUILD) $(PATH_BIN) $(PATH_OBJ) $(PATH_DEP)
-	 $(CC) $(CPPFLAGS) -c $(DEPFLAGS) $< -o $@
-	 $(POSTCOMPILE)
+	$(CC) $(CPPFLAGS) -c $(DEPFLAGS) $< -o $@
+	$(POSTCOMPILE)
 
 .PRECIOUS: $(FILES_DEP)
 $(FILES_DEP): ;
