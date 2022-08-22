@@ -57,8 +57,8 @@ clean-exe: ; $(RM) $(PATH_BIN)/$(OUT_EXE)
 delete-build: ; $(RMDIR) $(PATH_BUILD)
 
 ARGS ?=
-run: ; cd $(PATH_BIN) && ./$(OUT_EXE) $(ARGS)
+run: ; @cd $(PATH_BIN) && ./$(OUT_EXE) $(ARGS)
 
 help:
 	@echo Targets: all clean clean-obj clean-dep clean-exe delete-build run
-	@echo (make run ARGS="arg1 arg2...")
+	@echo '(make run ARGS="arg1 arg2...")'
