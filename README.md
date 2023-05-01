@@ -32,10 +32,10 @@ And a target to run the program (`make run ARGS="arg1 arg2..."`)
 By default:
 
 ```text
+- bin
 - build
-   - bin
    - obj
-     - dep
+   - dep
 - lib
 - src
 Makefile
@@ -49,7 +49,7 @@ The build task is simply running the `make` command. Launching (F5) does this as
 
 ## Windows
 
-It is highly recommended to use a Bash-like environment (with tools such as [MSYS](https://www.msys2.org/)) to make the best of Makefiles on Windows.  
+It is highly recommended to use a Bash-like environment (with tools such as [MSYS](https://www.msys2.org/) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/)) to make the best of Makefiles on Windows.  
 Trying to only use MinGW with CMD may lead to many problems.
 
 <details><summary>No Bash: (click to expand)</summary>

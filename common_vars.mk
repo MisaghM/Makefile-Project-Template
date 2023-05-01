@@ -1,6 +1,6 @@
 CXX      = g++
 CXXFLAGS += -Wall -pedantic
-CC       = $(CXX) $(CXXFLAGS)
+CXX      += $(CXXFLAGS)
 CPPFLAGS += -std=c++11
 
 AR      = ar

@@ -1,9 +1,9 @@
 PATH_SRC   := src
 PATH_LIB   := lib
 PATH_BUILD := build
-PATH_BIN   := $(PATH_BUILD)/bin
+PATH_BIN   := bin
 PATH_OBJ   := $(PATH_BUILD)/obj
-PATH_DEP   := $(PATH_OBJ)/__dep__
+PATH_DEP   := $(PATH_BUILD)/dep
 
 include common_vars.mk
 
@@ -28,14 +28,14 @@ FILES_OBJ = $(patsubst %, $(PATH_OBJ)/%.o, $(basename $(FILES)))
 all: $(PATH_BIN)/$(OUT_EXE)
 
 $(PATH_BIN)/$(OUT_EXE): $(FILES_OBJ)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 DEPFLAGS    = -MT $@ -MMD -MP -MF $(PATH_DEP)/$*.dTMP
 POSTCOMPILE = @$(MOVE) $(PATH_DEP)/$*.dTMP $(PATH_DEP)/$*.d > $(NULL_DEVICE) && touch $@
 
 $(PATH_OBJ)/%.o: %.cpp
 $(PATH_OBJ)/%.o: %.cpp $(PATH_DEP)/%.d | directories
-	$(CC) $(CPPFLAGS) -c $(DEPFLAGS) $< -o $@
+	$(CXX) $(CPPFLAGS) -c $(DEPFLAGS) $< -o $@
 	$(POSTCOMPILE)
 
 .PRECIOUS: $(FILES_DEP)

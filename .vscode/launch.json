@@ -5,11 +5,11 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/program.exe",
+            "program": "${workspaceFolder}/bin/program.exe",
             "args": [
             ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build/bin/",
+            "cwd": "${workspaceFolder}/bin/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
